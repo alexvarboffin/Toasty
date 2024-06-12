@@ -30,6 +30,10 @@ android {
             dimension 'W'
         }
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
 }
 
 dependencies {
@@ -41,29 +45,32 @@ dependencies {
 //    classifier "sources"
 //}
 
-afterEvaluate {
-    publishing {
-        description 'Upload jars to local artifactory'
-        group 'publishing'
-        publications {
-            release(MavenPublication) {
-                if (project.plugins.findPlugin("com.android.library")) {
-                    from components.findByName('release')
-                } else {
-                    from components.findByName('java')
-                }
-                groupId = "com.github.alexvarboffin"
-                artifactId = 'mint-android-app'
-                version = rootProject.ext.versionName
-                //artifact(sourcesJar)
-                artifact("$buildDir/outputs/aar/toasty-release.aar")
-            }
-        }
-    }
-    repositories {
-        mavenLocal()
-    }
-}
+//afterEvaluate {
+//    publishing {
+//        description 'Upload jars to local artifactory'
+//        group 'publishing'
+//        publications {
+//            release(MavenPublication) {
+//                if (project.plugins.findPlugin("com.android.library")) {
+//                    from components.findByName('release')
+//                } else {
+//                    from components.findByName('java')
+//                }
+//                groupId = "com.github.alexvarboffin"
+//                artifactId = 'mint-android-app'
+//                version = rootProject.ext.versionName
+//                //artifact(sourcesJar)
+//                artifact("$buildDir/outputs/aar/toasty-release.aar")
+//                pom {
+//                    description = 'First release'
+//                }
+//            }
+//        }
+//    }
+//    repositories {
+//        mavenLocal()
+//    }
+//}
 //publishing {
 //    publications {
 //        maven(MavenPublication) {
@@ -80,4 +87,36 @@ afterEvaluate {
 //        }
 //    }
 //}
+
+
+afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
+                // Проверка на наличие плагина и публикация компонента release
+                from components.findByName('release')
+
+                groupId = "com.github.alexvarboffin"
+                artifactId = 'mint-android-app'
+                version = rootProject.ext.versionName
+
+                // Определение артефакта для публикации
+                artifact("$buildDir/outputs/aar/toasty-release.aar")
+
+                pom {
+                    description = 'First release'
+                }
+            }
+        }
+
+        repositories {
+            mavenLocal()
+        }
+    }
+}
+
+tasks.named('build').configure {
+    dependsOn tasks.named('publishToMavenLocal')
+}
+
 build.dependsOn publishToMavenLocal
