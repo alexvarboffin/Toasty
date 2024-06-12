@@ -21,6 +21,13 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+//    publishing {
+//        publications {
+//            maven(MavenPublication) {
+//                from components.android
+//            }
+//        }
+//    }
 }
 
 dependencies {

@@ -45,7 +45,11 @@ afterEvaluate {
     publishing {
         publications {
             release(MavenPublication) {
-                //from components.productionRelease
+                if (project.plugins.findPlugin("com.android.library")) {
+                    from components.findByName('release')
+                } else {
+                    from components.findByName('java')
+                }
                 groupId = "es.dmoral.toasty"
                 artifactId = 'nice-project'
                 version = rootProject.ext.versionName
@@ -55,3 +59,19 @@ afterEvaluate {
         }
     }
 }
+//publishing {
+//    publications {
+//        maven(MavenPublication) {
+//            from components.android
+//        }
+//    }
+//}
+//publishing {
+//    publications {
+//        // Определите публикацию Maven
+//        maven(MavenPublication) {
+//            // Определите артефакт для публикации
+//            from components.release
+//        }
+//    }
+//}
