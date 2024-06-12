@@ -1,7 +1,5 @@
 apply plugin: 'com.android.library'
-//apply plugin: 'com.github.dcendents.android-maven'
-group = 'com.github.GrenderG'
-version = rootProject.ext.versionName
+apply plugin: 'maven-publish'
 
 android {
 
@@ -24,9 +22,36 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    flavorDimensions = ["W"]
+
+    productFlavors {
+        production {
+            dimension 'W'
+        }
+    }
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "androidx.appcompat:appcompat:$supportLibVersion"
+}
+//task sourceJar(type: Jar) {
+//    from android.sourceSets.main.java.srcDirs
+//    classifier "sources"
+//}
+
+afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
+                //from components.productionRelease
+                groupId = "es.dmoral.toasty"
+                artifactId = 'nice-project'
+                version = rootProject.ext.versionName
+                //artifact(sourcesJar)
+                artifact("$buildDir/outputs/aar/toasty-release.aar")
+            }
+        }
+    }
 }
