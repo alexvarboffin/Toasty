@@ -52,8 +52,8 @@ afterEvaluate {
                 } else {
                     from components.findByName('java')
                 }
-                groupId = "es.dmoral.toasty"
-                artifactId = 'nice-project'
+                groupId = "com.github.alexvarboffin"
+                artifactId = 'mint-android-app'
                 version = rootProject.ext.versionName
                 //artifact(sourcesJar)
                 artifact("$buildDir/outputs/aar/toasty-release.aar")
