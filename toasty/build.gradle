@@ -1,9 +1,12 @@
 apply plugin: 'com.android.library'
-apply plugin: 'com.github.dcendents.android-maven'
+//apply plugin: 'com.github.dcendents.android-maven'
 group = 'com.github.GrenderG'
 version = rootProject.ext.versionName
 
 android {
+
+    namespace("es.dmoral.toasty")
+
     compileSdkVersion rootProject.ext.compileSdkVersion
 
     defaultConfig {

@@ -1,6 +1,9 @@
 apply plugin: 'com.android.application'
 
 android {
+
+    namespace("es.dmoral.toastysample")
+
     compileSdkVersion rootProject.ext.compileSdkVersion
 
     defaultConfig {
