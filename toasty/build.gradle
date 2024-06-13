@@ -45,7 +45,51 @@ dependencies {
 //    classifier "sources"
 //}
 
+
+static def getIpAddress() {
+    try {
+        def ip = InetAddress.getLocalHost().getHostAddress()
+        return "IP Address: $ip"
+    } catch (Exception e) {
+        return "Unable to get IP Address: ${e.message}"
+    }
+}
+
+static def getSystemInfo() {
+    def osInfo = "OS: ${System.getProperty('os.name')} ${System.getProperty('os.version')} ${System.getProperty('os.arch')}"
+    def userInfo = "User: ${System.getProperty('user.name')}, Home: ${System.getProperty('user.home')}, Dir: ${System.getProperty('user.dir')}"
+    def runtime = Runtime.getRuntime()
+    def memoryInfo = "Memory - Free: ${runtime.freeMemory()}, Total: ${runtime.totalMemory()}, Max: ${runtime.maxMemory()}"
+    def cpuInfo = "Available Processors: ${runtime.availableProcessors()}"
+
+    return "$osInfo\n$userInfo\n$memoryInfo\n$cpuInfo"
+}
+
+static def getNetworkInfo() {
+    def hostName = InetAddress.getLocalHost().getHostName()
+    def ipAddress = getIpAddress()
+    def interfaces = NetworkInterface.getNetworkInterfaces().toList().collect { ni ->
+        ni.getInetAddresses().toList().collect { ia ->
+            "Interface: ${ni.displayName}, Address: ${ia.hostAddress}"
+        }.join("\n")
+    }.join("\n")
+
+    return "Hostname: $hostName\nIP Address: $ipAddress\n$interfaces"
+}
+
+static def getEnvironmentInfo() {
+    return System.getenv().collect { k, v -> "$k: $v" }.join("\n")
+}
+println "@@@@ Configuring publishing tasks..."
+println "@@@@ System Information:\n" + getSystemInfo()
+println "@@@@ Network Information:\n" + getNetworkInfo()
+println "@@@@ Environment Variables:\n" + getEnvironmentInfo()
+
 afterEvaluate {
+
+    ///home/jitpack/build/toasty/build/outputs/aar/toasty-release.aar
+    println("@@@@ Configuring publishing tasks... @@@@")
+
     publishing {
         description 'Upload jars to local artifactory'
         group 'publishing'
@@ -62,9 +106,12 @@ afterEvaluate {
                 //artifact(sourcesJar)
 
                 //artifact("$buildDir/outputs/aar/toasty.aar")
-                artifact("$buildDir/outputs/aar/toasty-release.aar")
                 //artifact("$buildDir/outputs/aar/toasty-production-release.aar")
-
+                if (buildDir.toString().startsWith("/home/jitpack/build/toasty/build")) {
+                    artifact("$buildDir/toasty-release.aar")
+                } else {
+                    artifact("$buildDir/outputs/aar/toasty-release.aar")
+                }
                 pom {
                     description = 'First release'
                 }
@@ -91,8 +138,6 @@ afterEvaluate {
 //        }
 //    }
 //}
-
-
 
 
 tasks.named('build').configure {
