@@ -23,13 +23,13 @@ android {
         }
     }
 
-    flavorDimensions = ["W"]
-
-    productFlavors {
-        production {
-            dimension 'W'
-        }
-    }
+//    flavorDimensions = ["W"]
+//
+//    productFlavors {
+//        production {
+//            dimension 'W'
+//        }
+//    }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_17
         targetCompatibility JavaVersion.VERSION_17
@@ -60,8 +60,10 @@ afterEvaluate {
                 artifactId = 'mint-android-app'
                 version = rootProject.ext.versionName
                 //artifact(sourcesJar)
-                //artifact("$buildDir/outputs/aar/toasty-release.aar")
-                artifact("$buildDir/outputs/aar/toasty-production-release.aar")
+
+                //artifact("$buildDir/outputs/aar/toasty.aar")
+                artifact("$buildDir/outputs/aar/toasty-release.aar")
+                //artifact("$buildDir/outputs/aar/toasty-production-release.aar")
 
                 pom {
                     description = 'First release'

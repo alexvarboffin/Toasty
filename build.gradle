@@ -8,6 +8,7 @@ buildscript {
         jcenter()
         google()
         mavenCentral()
+        maven { url 'https://www.jitpack.io' }
         maven {
             url "https://plugins.gradle.org/m2/"
         }
@@ -24,6 +25,8 @@ allprojects {
     repositories {
         //noinspection JcenterRepositoryObsolete
         jcenter()
+        mavenCentral()
+        maven { url 'https://www.jitpack.io' }
         google()
     }
 }
@@ -35,7 +38,7 @@ ext {
 
     supportLibVersion = '1.7.0'
 
-    versionCode = 152
+    versionCode = 1521
     versionName = '1.5.2'
 }
 
