@@ -38,7 +38,7 @@ ext {
 
     supportLibVersion = '1.7.0'
 
-    versionCode = 1522
+    versionCode = 1523
     versionName = '1.5.2'
 }
 

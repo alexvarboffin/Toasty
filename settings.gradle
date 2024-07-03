@@ -1,1 +1,3 @@
 include ':app', ':toasty'
+//include ':threader'
+//project(':threader').projectDir = new File('D:\\walhalla\\sdk\\android\\multithreader\\threader\\')
