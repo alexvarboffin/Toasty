@@ -101,7 +101,7 @@ afterEvaluate {
                     from components.findByName('java')
                 }
                 groupId = "com.github.alexvarboffin"
-                artifactId = 'mint-android-app'
+                artifactId = 'toastylib'
                 version = rootProject.ext.versionName
                 //artifact(sourcesJar)
 
@@ -111,6 +111,7 @@ afterEvaluate {
                     artifact("$buildDir/toasty-release.aar")
                 } else {
                     artifact("$buildDir/outputs/aar/toasty-release.aar")
+                    print("$buildDir/outputs/aar/toasty-release.aar")
                 }
                 pom {
                     description = 'First release'
@@ -139,9 +140,12 @@ afterEvaluate {
 //    }
 //}
 
+//tasks.named("publishToMavenLocal") {
+//    mustRunAfter tasks.named("build")
+//}
 
-tasks.named('build').configure {
-    dependsOn tasks.named('publishToMavenLocal')
-}
+//tasks.named('build').configure {
+//    dependsOn tasks.named('publishToMavenLocal')
+//}
 
-build.dependsOn publishToMavenLocal
+//build.dependsOn publishToMavenLocal
