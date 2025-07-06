@@ -97,38 +97,41 @@ afterEvaluate {
         description 'Upload jars to local artifactory'
         group 'publishing'
         publications {
-//            release(MavenPublication) {
-//                if (project.plugins.findPlugin("com.android.library")) {
-//                    from components.findByName('release')
-//                } else {
-//                    from components.findByName('java')
-//                }
-//                groupId = "com.github.alexvarboffin"
-//                artifactId = 'Toasty'
-//                version = rootProject.ext.versionName
-//                //artifact(sourcesJar)
-//
-//                //artifact("$buildDir/outputs/aar/toasty.aar")
-//                //artifact("$buildDir/outputs/aar/toasty-production-release.aar")
-//                if (buildDir.toString().startsWith("/home/jitpack/build/toasty/build")) {
-//                    println("@@1@@ $buildDir")
-//                    //artifact("$buildDir/toasty-release.aar")
-//                } else {
-//                    println("@@2@@ $buildDir")
-//                    //artifact("$buildDir/outputs/aar/Toasty.aar")
-//                }
-//                pom {
-//                    description = 'First release'
-//                    packaging = 'aar'
-//                }
-//            }
-
-
             release(MavenPublication) {
                 afterEvaluate {
-                    from components.findByName('release')
+                    if (project.plugins.findPlugin("com.android.library")) {
+                        from components.findByName('release')
+                    } else {
+                        from components.findByName('java')
+                    }
+                    groupId = "com.github.alexvarboffin"
+                    artifactId = 'Toasty'
+                    version = rootProject.ext.versionName
+                    //artifact(sourcesJar)
+
+                    //artifact("$buildDir/outputs/aar/toasty.aar")
+                    //artifact("$buildDir/outputs/aar/toasty-production-release.aar")
+                    if (buildDir.toString().startsWith("/home/jitpack/build/toasty/build")) {
+                        println("@@1@@ $buildDir")
+                        //artifact("$buildDir/toasty-release.aar")
+                    } else {
+                        println("@@2@@ $buildDir")
+                        //artifact("$buildDir/outputs/aar/Toasty.aar")
+                    }
+                    pom {
+                        description = 'First release'
+                        packaging = 'aar'
+                    }
                 }
+
             }
+
+//Simple
+//            release(MavenPublication) {
+//                afterEvaluate {
+//                    from components.findByName('release')
+//                }
+//            }
         }
     }
     repositories {
