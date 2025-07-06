@@ -39,7 +39,7 @@ ext {
     supportLibVersion = '1.7.0'
 
     versionCode = 1524
-    versionName = '1.5.5'
+    versionName = '1.6.5'
 }
 
 task clean(type: Delete) {
