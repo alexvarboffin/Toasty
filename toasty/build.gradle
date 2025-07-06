@@ -88,15 +88,15 @@ println "@@@@ Network Information:\n" + getNetworkInfo()
 println "@@@@ Environment Variables:\n" + getEnvironmentInfo()
 
 
-//afterEvaluate {
-//
-//    ///home/jitpack/build/toasty/build/outputs/aar/toasty-release.aar
-//    println("@@@@ Configuring publishing tasks... @@@@")
-//
-//    publishing {
-//        description 'Upload jars to local artifactory'
-//        group 'publishing'
-//        publications {
+afterEvaluate {
+
+    ///home/jitpack/build/toasty/build/outputs/aar/toasty-release.aar
+    println("@@@@ Configuring publishing tasks... @@@@")
+
+    publishing {
+        description 'Upload jars to local artifactory'
+        group 'publishing'
+        publications {
 //            release(MavenPublication) {
 //                if (project.plugins.findPlugin("com.android.library")) {
 //                    from components.findByName('release')
@@ -122,13 +122,19 @@ println "@@@@ Environment Variables:\n" + getEnvironmentInfo()
 //                    packaging = 'aar'
 //                }
 //            }
-//
-//        }
-//    }
-//    repositories {
-//        mavenLocal()
-//    }
-//}
+
+
+            release(MavenPublication) {
+                afterEvaluate {
+                    from components.findByName('release')
+                }
+            }
+        }
+    }
+    repositories {
+        mavenLocal()
+    }
+}
 //publishing {
 //    publications {
 //        maven(MavenPublication) {
