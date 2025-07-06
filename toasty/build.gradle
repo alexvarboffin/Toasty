@@ -1,12 +1,12 @@
 apply plugin: 'com.android.library'
 apply plugin: 'maven-publish'
-groupId = "com.github.alexvarboffin"
+
 
 android {
 
     namespace("es.dmoral.toasty")
-
-    compileSdkVersion rootProject.ext.compileSdkVersion0
+    compileSdk 36
+    buildToolsVersion '36.0.0'
 
     defaultConfig {
         minSdkVersion rootProject.ext.minSdkVersion
