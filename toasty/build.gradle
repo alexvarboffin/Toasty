@@ -124,7 +124,7 @@ afterEvaluate {
 //            }
             maven(MavenPublication) {
                 groupId = "com.github.alexvarboffin"
-                artifactId = 'Toasty'
+                artifactId = 'toasty'
                 version = rootProject.ext.versionName
                 pom {
                     description = 'First release'
