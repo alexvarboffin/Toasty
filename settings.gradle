@@ -1,3 +1,17 @@
-include ':app', ':toasty'
-//include ':threader'
-//project(':threader').projectDir = new File('D:\\walhalla\\sdk\\android\\multithreader\\threader\\')
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        google()
+        mavenCentral()
+    }
+}
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+rootProject.name = "Toasty"
+include ':app'
+include ':toasty'

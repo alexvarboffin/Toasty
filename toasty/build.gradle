@@ -9,7 +9,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.1.3'
+        classpath 'com.android.tools.build:gradle:7.2.2'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
@@ -22,15 +22,12 @@ plugins {
 }
 
 android {
-    namespace("es.dmoral.toasty")
     compileSdk 36
-    buildToolsVersion '36.0.0'
+    namespace("es.dmoral.toasty")
 
     defaultConfig {
-        minSdkVersion rootProject.ext.minSdkVersion
-        targetSdkVersion rootProject.ext.targetSdkVersion
-//        versionCode rootProject.ext.versionCode
-//        versionName rootProject.ext.versionName
+        minSdk 21
+        targetSdk 36
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
@@ -68,12 +65,12 @@ java {
 
 dependencies {
 
-    implementation 'androidx.core:core-ktx:1.16.0'
-    implementation 'androidx.appcompat:appcompat:1.7.1'
-    implementation 'com.google.android.material:material:1.12.0'
+    implementation 'androidx.core:core-ktx:1.7.0'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'com.google.android.material:material:1.9.0'
     testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.2.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.6.1'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 }
 
 // 5. Add below line
@@ -81,9 +78,9 @@ dependencies {
 publishing {
     publications {
         maven(MavenPublication) {
-            groupId = 'com.github.alexvarboffin'
-            artifactId = 'toasty'
-            version = rootProject.ext.versionName
+            groupId = 'com.github.geek-atif'
+            artifactId = 'com-atifqamar-customtoast'
+            version = "1.0"
             pom {
                 description = 'First release'
             }
@@ -93,175 +90,3 @@ publishing {
         mavenLocal()
     }
 }
-
-
-//apply plugin: 'com.android.library'
-//apply plugin: 'maven-publish'
-//
-//
-//android {
-//
-//    namespace("es.dmoral.toasty")
-//    compileSdk 36
-//    buildToolsVersion '36.0.0'
-//
-//    defaultConfig {
-//        minSdkVersion rootProject.ext.minSdkVersion
-//        targetSdkVersion rootProject.ext.targetSdkVersion
-//        versionCode rootProject.ext.versionCode
-//        versionName rootProject.ext.versionName
-//
-//        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-//
-//    }
-//    buildTypes {
-//        release {
-//            minifyEnabled false
-//            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-//        }
-//    }
-//
-////    flavorDimensions = ["W"]
-////
-////    productFlavors {
-////        production {
-////            dimension 'W'
-////        }
-////    }
-//    compileOptions {
-//        sourceCompatibility JavaVersion.VERSION_17
-//        targetCompatibility JavaVersion.VERSION_17
-//    }
-//}
-//
-//dependencies {
-//    implementation fileTree(dir: 'libs', include: ['*.jar'])
-//    implementation "androidx.appcompat:appcompat:$supportLibVersion"
-//}
-////task sourceJar(type: Jar) {
-////    from android.sourceSets.main.java.srcDirs
-////    classifier "sources"
-////}
-//
-//
-//static def getIpAddress() {
-//    try {
-//        def ip = InetAddress.getLocalHost().getHostAddress()
-//        return "IP Address: $ip"
-//    } catch (Exception e) {
-//        return "Unable to get IP Address: ${e.message}"
-//    }
-//}
-//
-//static def getSystemInfo() {
-//    def osInfo = "OS: ${System.getProperty('os.name')} ${System.getProperty('os.version')} ${System.getProperty('os.arch')}"
-//    def userInfo = "User: ${System.getProperty('user.name')}, Home: ${System.getProperty('user.home')}, Dir: ${System.getProperty('user.dir')}"
-//    def runtime = Runtime.getRuntime()
-//    def memoryInfo = "Memory - Free: ${runtime.freeMemory()}, Total: ${runtime.totalMemory()}, Max: ${runtime.maxMemory()}"
-//    def cpuInfo = "Available Processors: ${runtime.availableProcessors()}"
-//
-//    return "$osInfo\n$userInfo\n$memoryInfo\n$cpuInfo"
-//}
-//
-//static def getNetworkInfo() {
-//    def hostName = InetAddress.getLocalHost().getHostName()
-//    def ipAddress = getIpAddress()
-//    def interfaces = NetworkInterface.getNetworkInterfaces().toList().collect { ni ->
-//        ni.getInetAddresses().toList().collect { ia ->
-//            "Interface: ${ni.displayName}, Address: ${ia.hostAddress}"
-//        }.join("\n")
-//    }.join("\n")
-//
-//    return "Hostname: $hostName\nIP Address: $ipAddress\n$interfaces"
-//}
-//
-//static def getEnvironmentInfo() {
-//    return System.getenv().collect { k, v -> "$k: $v" }.join("\n")
-//}
-//
-//println "@@@@ Configuring publishing tasks..."
-//println "@@@@ System Information:\n" + getSystemInfo()
-//println "@@@@ Network Information:\n" + getNetworkInfo()
-//println "@@@@ Environment Variables:\n" + getEnvironmentInfo()
-//
-//
-//afterEvaluate {
-//
-//    ///home/jitpack/build/toasty/build/outputs/aar/toasty-release.aar
-//    println("@@@@ Configuring publishing tasks... @@@@")
-//
-//    publishing {
-//        description 'Upload jars to local artifactory'
-//        group 'publishing'
-//        publications {
-////            release(MavenPublication) {
-////                if (project.plugins.findPlugin("com.android.library")) {
-////                    from components.findByName('release')
-////                } else {
-////                    from components.findByName('java')
-////                }
-////                groupId = "com.github.alexvarboffin"
-////                artifactId = 'toasty'
-////                version = rootProject.ext.versionName
-////                //artifact(sourcesJar)
-////
-////                //artifact("$buildDir/outputs/aar/toasty.aar")
-////                //artifact("$buildDir/outputs/aar/toasty-production-release.aar")
-////                if (buildDir.toString().startsWith("/home/jitpack/build/toasty/build")) {
-////                    println("@@1@@ $buildDir")
-////                    //artifact("$buildDir/toasty-release.aar")
-////                } else {
-////                    println("@@2@@ $buildDir")
-////                    artifact("$buildDir/outputs/aar/Toasty.aar")
-////                }
-////                pom {
-////                    description = 'First release'
-////                    packaging = 'aar'
-////                }
-////            }
-//            maven(MavenPublication) {
-//                groupId = "com.github.alexvarboffin"
-//                artifactId = 'toasty'
-//                version = rootProject.ext.versionName
-//                pom {
-//                    description = 'First release'
-//                }
-//            }
-////Simple
-////            release(MavenPublication) {
-////                afterEvaluate {
-////                    from components.findByName('release')
-////                }
-////            }
-//        }
-//    }
-//    repositories {
-//        mavenLocal()
-//    }
-//}
-////publishing {
-////    publications {
-////        maven(MavenPublication) {
-////            from components.android
-////        }
-////    }
-////}
-////publishing {
-////    publications {
-////        // Определите публикацию Maven
-////        maven(MavenPublication) {
-////            // Определите артефакт для публикации
-////            from components.release
-////        }
-////    }
-////}
-//
-////tasks.named("publishToMavenLocal") {
-////    mustRunAfter tasks.named("build")
-////}
-//
-////tasks.named('build').configure {
-////    dependsOn tasks.named('publishToMavenLocal')
-////}
-//
-////build.dependsOn publishToMavenLocal
