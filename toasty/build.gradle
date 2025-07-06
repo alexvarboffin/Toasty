@@ -115,7 +115,7 @@ afterEvaluate {
                     //artifact("$buildDir/toasty-release.aar")
                 } else {
                     println("@@2@@ $buildDir")
-                    //artifact("$buildDir/outputs/aar/Toasty.aar")
+                    artifact("$buildDir/outputs/aar/Toasty.aar")
                 }
                 pom {
                     description = 'First release'
