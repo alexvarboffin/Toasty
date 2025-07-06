@@ -85,8 +85,12 @@ println "@@@@ System Information:\n" + getSystemInfo()
 println "@@@@ Network Information:\n" + getNetworkInfo()
 println "@@@@ Environment Variables:\n" + getEnvironmentInfo()
 
-afterEvaluate {
 
+
+afterEvaluate {
+    tasks.named("publishReleasePublicationToMavenLocal") {
+        dependsOn("bundleReleaseAar")
+    }
     ///home/jitpack/build/toasty/build/outputs/aar/toasty-release.aar
     println("@@@@ Configuring publishing tasks... @@@@")
 
