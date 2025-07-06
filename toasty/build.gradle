@@ -78,7 +78,7 @@ dependencies {
 publishing {
     publications {
         maven(MavenPublication) {
-            groupId = 'com.github.geek-atif'
+            groupId = 'com.github.alexvarboffin'
             artifactId = 'com-atifqamar-customtoast'
             version = "1.0"
             pom {
